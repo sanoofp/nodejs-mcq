@@ -1,0 +1,23 @@
+{
+  "name": "educhamp-assessment-1",
+  "version": "1.0.0",
+  "description": "EduChamp Assessment - Project 1",
+  "main": "app.js",
+  "author": "Sanoofp",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "sever": "nodemon app.js",
+    "client": "cd client && yarn start",
+    "dev": "concurrently \"yarn start\" \"yarn client\""
+  },
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.1"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.2",
+    "nodemon": "^1.19.2"
+  }
+}
