@@ -5,8 +5,10 @@ const app = express();
 
 require("dotenv").config();
 
-mongoose.connect(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose
+  .connect(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true })
   .then(() => console.log("Coonected to Database"))
+  .catch(err => console.log("Failed toconnect Database", err));
 
 app.use("/", require("./routes/index"));
 
