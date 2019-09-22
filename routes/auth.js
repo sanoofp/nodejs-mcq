@@ -1,17 +1,19 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
-const {localStrategySchema} = require("../helper/validation")
+const { localStrategySchema } = require("../helper/validation")
 const User = require("../model/User");
+const { authorisation } = require("../helper/auth")
 
 // @route GET /api/auth 
 // Authorize user
-router.get("/", (req, res, next) => {
-  passport.authenticate("jwt", { session: false }, (err, user, info) => {
-    if(err || !user) return res.status(401).json(info);
-    res.status(200).json(user);
-  })(req, res, next)
-})
+router.get("/", authorisation, (req, res, next) => {
+  User.findById(req.user.id)
+    .select("-password")
+    .then(user => res.status(200).json(user))
+    .catch(err => res.status(400).json(err))
+});
+
 
 // @route POST /api/auth/signin 
 // Signin a user with email and password

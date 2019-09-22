@@ -5,7 +5,7 @@ const questionSchema = new Schema({
   question: String,
   options: [],
   answer: String,
-  weigtage: Number
+  weightage: Number
 });
 
 const question = mongoose.model("questions", questionSchema);

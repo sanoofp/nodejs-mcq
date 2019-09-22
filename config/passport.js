@@ -1,25 +1,8 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const LocalStrategy = require('passport-local').Strategy;
-const JWTStrategy = require("passport-jwt").Strategy;
 const bcrypt = require("bcryptjs");
 const User = require("../model/User");
-const { cookieExtractor } = require("../helper/auth")
-
-passport.use("jwt", new JWTStrategy({
-  jwtFromRequest: cookieExtractor,
-  secretOrKey: process.env.JWT_SECRET,
-}, function (jwtPayload, done) {
-  User.findById(jwtPayload.id)
-    .select("-password")
-    .then(user => {
-      if (!user) return done(null, false, {message: `Invalid Token`});
-    
-      return done(null, user);
-    })
-    .catch(err => done(err))
-}));
-
 
 passport.use(new LocalStrategy({
   usernameField: 'email',
