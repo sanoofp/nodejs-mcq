@@ -9,7 +9,6 @@ const User = require("../model/User");
 router.get("/", (req, res, next) => {
   passport.authenticate("jwt", { session: false }, (err, user, info) => {
     if(err || !user) return res.status(401).json(info);
-    
     res.status(200).json(user);
   })(req, res, next)
 })
