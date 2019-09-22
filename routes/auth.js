@@ -4,15 +4,38 @@ const passport = require("passport");
 const {localStrategySchema} = require("../helper/validation")
 const User = require("../model/User");
 
-// @route POST /api/auth/signin Signin a user with email and password
-router.post("/signin", passport.authenticate("local", {session: false}), (req, res) => {
-  console.log(req.user);
+// @route GET /api/auth 
+// Authorize user
+router.get("/", (req, res, next) => {
+  passport.authenticate("jwt", { session: false }, (err, user, info) => {
+    if(err || !user) return res.status(401).json(info);
+    
+    res.status(200).json(user);
+  })(req, res, next)
 })
 
-// @route POST /api/auth/signup Signup a user with emai
+// @route POST /api/auth/signin 
+// Signin a user with email and password
+router.post("/signin", (req, res, next) => {
+  passport.authenticate("local", { session: false }, (err, user, info) => {
+    if(err || !user) return res.status(400).json(info);
+    
+    jwt.sign({ id: user.id }, process.env.JWT_SECRET, (err, token) => {
+      if(err) throw err;
+      res.status(200).json({token: token, user: {
+          email: user.email,
+          username: user.username
+        }
+      })
+    })
+
+  })(req, res, next);
+})
+
+// @route POST /api/auth/signup 
+// Signup a user with email
 router.post("/signup", (req, res) => {
   const {error, value} = localStrategySchema.validate(req.body);
-  console.log("ERROR :: ", error, "DATA :: ", value);
   if (error) 
     return res.status(400).json(error);
   
@@ -46,12 +69,5 @@ router.post("/signup", (req, res) => {
     .catch(err => console.log(err))
 });
 
-router.post("/signin", (req, res) => {
-  const {error, value} = schema.validate(req.body);
-  if (error) 
-    return res.status(400).json(error);
-  
-  const {email, username} = req.body;
-})
 
 module.exports = router;
