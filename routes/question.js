@@ -19,24 +19,27 @@ router.get("/", authorisation, (req, res) => {
 // Evaluate question and generates report
 router.post("/evaluate", authorisation, (req, res) => {
   const userAnswers = req.body.questions;
-  console.log("USER :::: ", userAnswers);
-  let totalWeightage = 0;
+  let totalWeightage = 0, scoredWeightage = 0;
 
   Question.find({})
     .then(questions => {
       questions.map(correctQuestion => {
-        
-        userAnswers.map(userAnswer => {
+        totalWeightage += correctQuestion.weightage
+        userAnswers.find(userAnswer => {
           if(userAnswer["answer"] == correctQuestion["answer"]) {
-            totalWeightage += userAnswer.weightage
+            scoredWeightage += userAnswer.weightage;
+            return true;
           }
+          return false;
         })
-
       });
 
-      console.log("TOTAL MARK :: ", totalWeightage);
+      console.log("TOTAL MARK :: ", totalWeightage, " : GOT :", scoredWeightage);
 
-      res.status(200).json(questions);
+      res.status(200).json({
+        totalWeightage: totalWeightage,
+        scoredWeightage: scoredWeightage
+      });
     })
 })
 
