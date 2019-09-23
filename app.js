@@ -16,8 +16,8 @@ app.use(passport.initialize());
 
 mongoose
   .connect(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true })
-  .then(() => console.log("Coonected to Database"))
-  .catch(err => console.log("Failed toconnect Database", err));
+  .then(() => console.log("Connected to Database"))
+  .catch(err => console.log("Failed to Connect Database", err));
 
 app.use("/", require("./routes/index"));
 app.use("/api/auth", require("./routes/auth"));

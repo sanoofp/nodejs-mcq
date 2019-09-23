@@ -15,6 +15,31 @@ router.get("/", authorisation, (req, res) => {
     })
 })
 
+// @route GET /api/question/evaluate
+// Evaluate question and generates report
+router.post("/evaluate", authorisation, (req, res) => {
+  const userAnswers = req.body.questions;
+  console.log("USER :::: ", userAnswers);
+  let totalWeightage = 0;
+
+  Question.find({})
+    .then(questions => {
+      questions.map(correctQuestion => {
+        
+        userAnswers.map(userAnswer => {
+          if(userAnswer["answer"] == correctQuestion["answer"]) {
+            totalWeightage += userAnswer.weightage
+          }
+        })
+
+      });
+
+      console.log("TOTAL MARK :: ", totalWeightage);
+
+      res.status(200).json(questions);
+    })
+})
+
 // @route POST /api/question/add
 // Add question to DB
 router.get("/addall", async (req, res) => {
