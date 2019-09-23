@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const { localStrategySchema } = require("../helper/validation")
 const User = require("../model/User");
+const { JWT_SECRET } = require("../config/keys")
 const { authorisation } = require("../helper/auth")
 
 // @route GET /api/auth 
@@ -21,7 +22,7 @@ router.post("/signin", (req, res, next) => {
   passport.authenticate("local", { session: false }, (err, user, info) => {
     if(err || !user) return res.status(400).json(info);
     
-    jwt.sign({ id: user.id }, process.env.JWT_SECRET, (err, token) => {
+    jwt.sign({ id: user.id }, JWT_SECRET, (err, token) => {
       if(err) throw err;
       res.status(200).json({token: token, user: {
           email: user.email,
@@ -53,7 +54,7 @@ router.post("/signup", (req, res) => {
         .then(user => {
           jwt.sign({
             id: user.id
-          }, process.env.JWT_SECRET, (err, token) => {
+          }, JWT_SECRET, (err, token) => {
             if (err) 
               throw err;
             
