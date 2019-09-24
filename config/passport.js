@@ -4,6 +4,10 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require("bcryptjs");
 const User = require("../model/User");
 
+/** 
+  * @desc Passport Localstrategy - Signin with email and password and returns the user
+  * along with the JWT token signed with user ID
+*/
 passport.use(new LocalStrategy({
   usernameField: 'email',
 }, function (email, password, done) {

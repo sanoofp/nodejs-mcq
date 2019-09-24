@@ -4,8 +4,11 @@ const { ques } = require("../mcq_20")
 const { shuffle } = require("../helper/array")
 const { authorisation } = require("../helper/auth")
 
-// @route GET /api/question
-// Get all questions
+/**
+ * @route GET /api/question
+  * @desc Picks all the questions from db 
+  * and respond with the questions,
+*/
 router.get("/", authorisation, (req, res) => {
   Question.find({})
     .select("-answer")
@@ -15,8 +18,13 @@ router.get("/", authorisation, (req, res) => {
     })
 })
 
-// @route GET /api/question/evaluate
-// Evaluate question and generates report
+/**
+ * @route GET /api/question/evaluate
+  * @desc Evaluate each question from the request 
+  * and generate the total weightage mark, 
+  * weightage scored by the user and respond with
+  * these along with attended question
+*/
 router.post("/evaluate", authorisation, (req, res) => {
   const userAnswers = req.body.questions;
   let totalWeightage = 0, scoredWeightage = 0, incorrectTags = [];
@@ -24,11 +32,17 @@ router.post("/evaluate", authorisation, (req, res) => {
 
   Question.find({})
     .then(questions => {
-  
       questions.map(correctQuestion => {
         totalWeightage += correctQuestion.weightage
         userAnswers.find(userAnswer => {
           if(userAnswer._id == correctQuestion._id) {
+            /*  
+              Checks for correct answer and increments the score weightage
+              by the required weightage.
+              If the answers are incorrect, the tags are puhed into the incorrectTags
+              array. 
+              [Needs a better algorithm to calculate weightage]
+            */
             if(userAnswer["answer"] == correctQuestion["answer"]) {
               scoredWeightage += userAnswer.weightage;
               attendedQuestions.push(correctQuestion);
@@ -56,8 +70,11 @@ router.post("/evaluate", authorisation, (req, res) => {
     })
 })
 
-// @route POST /api/question/add
-// Add question to DB (from mcq_20.js)
+/**
+ * @route POST /api/question/add
+ * @desc Add question to DB (from mcq_20.js)
+ * For Development Purpose only - NEEDS TO BE DELETED IN PRODUCTION
+*/
 router.get("/addall", async (req, res) => {
 
   await ques.map( async q => {

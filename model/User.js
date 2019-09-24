@@ -24,6 +24,10 @@ const userSchema = new Schema({
 });
 
 
+/**
+  * @desc Mongoose middleware - Hash the password before pushing
+  * to the DB. Does not Hash on every save. 
+*/
 userSchema.pre("save", function(next) {
   if (!this.isModified("password")) {
     return next();
