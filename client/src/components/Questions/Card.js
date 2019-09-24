@@ -18,7 +18,7 @@ function QuestionCard(props) {
             <div key={key} className="option">
               <Radio
                 onChange={handleChange}
-                color="primary"
+                color={`${currentQuestion["answer"] && currentQuestion["answer"] === option ? "default" : "primary"}`}
                 checked={choice === option || currentQuestion["answer"] === option}
                 value={option}
                 label={option}

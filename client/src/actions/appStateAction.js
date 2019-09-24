@@ -1,6 +1,7 @@
 import { 
   HANDLE_DIALOG_STATE,
   LOADING,
+  DRAWER_STATE,
   SNACKBAR_STATE
 } from "../store/types";
 
@@ -43,6 +44,17 @@ export const handleSnackbar = (open, type = "error", message = "") => {
 export const handleLoading = state => {
   return {
     type: LOADING,
+    payload: state
+  }
+}
+
+/** 
+  * @desc Handles the drawer component state.
+  * @param {boolean} state - The open state of drawer component.
+*/
+export const handleDrawer = state => {
+  return {
+    type: DRAWER_STATE,
     payload: state
   }
 }

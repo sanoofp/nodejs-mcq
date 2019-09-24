@@ -4,5 +4,14 @@
       padding: 0 20px;
       width: 100%;
     }
-  }  
+  }
+  header {
+    .hamburger {
+      display: inline-block !important;
+    }
+    .header-nav {
+      display: none !important;
+      max-width: 100px;
+    }
+  }
 }

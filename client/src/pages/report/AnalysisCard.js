@@ -15,11 +15,17 @@ export default function AnalysisCard(props) {
     <div className="card improvements d-flex flex-column align-items-center">
       <h2>Analysis</h2>
       <div className="incorrect-tags">
-        <h5>Based on your attended question, your weak areas are :</h5> 
-        { 
-          incorrectTags.map(tag => <Chip key={tag} label={tag} className="chip" />) 
-        }
+        
+          { 
+            incorrectTags.length > 0 && 
+            <h5>Based on your attended question, your weak areas are :</h5>
+          }
+          {
+            incorrectTags.map(tag => <Chip key={tag} label={tag} className="chip" />)
+          }          
+        
         <div className="webpage-links">
+          <h5>Useful websites for education</h5>
           {links.map(({ to, text }, i) => <A to={to} key={text} text={text} />)}
         </div>
       </div>      

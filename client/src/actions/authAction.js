@@ -13,6 +13,10 @@ import { handleLoading, handleDialog, handleSnackbar } from "./appStateAction";
 import { errorMsg } from "../helper/error";
 import { axiosHeader } from "../helper/auth";
 
+/** 
+  * @desc Authorise the user, if the jwt token is found 
+  * in the localStorage, else hit's the back end api and get the user. 
+*/
 export const loadUser = () => (dispatch, getState) => {
   const token = getState().authReducer.token;
   if(!token) return dispatch({ type: AUTH_FAIL });
@@ -32,6 +36,10 @@ export const loadUser = () => (dispatch, getState) => {
     })
 }
 
+/** 
+  * @desc Sign in a user using the email and pasword provided. 
+  * If the response i OK, the loading, snackbar and dialog state are updated. 
+*/
 export const signinWithEmail = data => dispatch => {
   dispatch(handleLoading(true));
   axios({
@@ -55,12 +63,16 @@ export const signinWithEmail = data => dispatch => {
     })
   })
   .catch(function(err) {
-    console.log(err.response);
     dispatch({ type: SIGNIN_FAIL })
     dispatch(handleLoading(false));  
     dispatch(handleSnackbar(true, "error", errorMsg(err.response)));    
   })
 }
+
+/** 
+  * @desc Create an account for the user using the email, username and pasword provided.
+  * If the response i OK, the loading, snackbar and dialog state are updated 
+*/
 export const signupWithEmail = data => dispatch => {
   dispatch(handleLoading(true));
   
@@ -96,6 +108,13 @@ export const signupWithEmail = data => dispatch => {
     });
 }
 
+
+/** 
+  * @desc Sign out the user.
+  * Since, jwt is used for authetication and authorisation,
+  * there is no need to hit the backend API.
+  * Just clear the localStorage and required state of the app. 
+*/
 export const signOut = () => dispatch => {
   dispatch(handleLoading(true));
   dispatch({ type: CLEAR_QUESTIONS })

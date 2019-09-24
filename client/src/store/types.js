@@ -1,5 +1,6 @@
 export const LOADING = "LOADING";
 export const HANDLE_DIALOG_STATE = "HANDLE_DIALOG_STATE";
+export const DRAWER_STATE = "DRAWER_STATE";
 export const SNACKBAR_STATE = "SNACKBAR_STATE";
 
 export const SIGNIN_SUCCESS = "SIGNIN_SUCCESS";

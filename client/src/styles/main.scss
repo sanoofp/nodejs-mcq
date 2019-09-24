@@ -12,7 +12,9 @@ header {
   background-color: $primaryColor;
   color: $white;
   padding: 0.4em 0;
-
+  .hamburger {
+    display: none;
+  }
   .header-nav {
     width: auto;
   }

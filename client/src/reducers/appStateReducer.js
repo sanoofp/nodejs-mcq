@@ -1,12 +1,14 @@
 import { 
   HANDLE_DIALOG_STATE,
   LOADING,
-  SNACKBAR_STATE
+  SNACKBAR_STATE,
+  DRAWER_STATE
  } from "../store/types";
 
 const initialState = {
   signinDialogOpen: false,
   signupDialogOpen: false,
+  drawerOpen: false,
   loading: false,
   snackbar: {
     open: false,
@@ -39,6 +41,13 @@ export default function(state = initialState, action) {
           type: action.payload.type,
           message: action.payload.message
         }
+      }
+    }
+
+    case DRAWER_STATE: {
+      return {
+        ...state,
+        drawerOpen: action.payload
       }
     }
 
