@@ -10,7 +10,12 @@ Webapp for online MCQ test practicing. Tech stack used in this project are:
 
 * Backend
 
-  * [Node.js](https://nodejs.org/en/) - Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+  * [Node.js](https://nodejs.org/en/) - JavaScript runtime built on Chrome's V8 JavaScript engine.
   * [Express.js](http://expressjs.com/) - web framework for Node.js
   * [Mongo DB](https://www.mongodb.com/) - NoQ Database
   * [Passport.js](passportjs.org) - Authentication middleware for Node.js
+
+
+# Running Locally
+
+
