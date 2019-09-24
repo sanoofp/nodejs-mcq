@@ -5,11 +5,16 @@ import CheckCircleRounded from '@material-ui/icons/CheckCircleRounded';
 import green from '@material-ui/core/colors/green';
 import blue from '@material-ui/core/colors/blue';
 import grey from '@material-ui/core/colors/grey';
-import { setCurrentIndex, submitAnswers } from "../../actions/questionAction";
+import { setCurrentIndex, submitAnswers, setCurrentChoice } from "../../actions/questionAction";
 
 function Controls(props) {
-  const { questionReducer, setCurrentIndex, submitAnswers } = props;
+  const { questionReducer, setCurrentIndex, submitAnswers, setCurrentChoice } = props;
   const { questions, currentIndex } = questionReducer;
+
+  const handleClick = index => {
+    setCurrentChoice("");
+    setCurrentIndex(index)
+  }
 
   return (
     <div className="card controls d-flex flex-column align-items-center">
@@ -25,7 +30,7 @@ function Controls(props) {
             size="small" 
             color="secondary"
             className="index-btn"
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => handleClick(index)}
           >
             {index + 1}
           </Fab>
@@ -49,4 +54,4 @@ const mapStateToProps = state => ({
   questionReducer: state.questionReducer
 })
 
-export default connect(mapStateToProps, { setCurrentIndex, submitAnswers })(Controls);
+export default connect(mapStateToProps, { setCurrentIndex, submitAnswers, setCurrentChoice })(Controls);
