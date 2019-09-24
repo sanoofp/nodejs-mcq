@@ -4,8 +4,6 @@ const { ques } = require("../mcq_20")
 const { shuffle } = require("../helper/array")
 const { authorisation } = require("../helper/auth")
 
-console.log(ques.length);
-
 // @route GET /api/question
 // Get all questions
 router.get("/", authorisation, (req, res) => {
@@ -22,28 +20,38 @@ router.get("/", authorisation, (req, res) => {
 router.post("/evaluate", authorisation, (req, res) => {
   const userAnswers = req.body.questions;
   let totalWeightage = 0, scoredWeightage = 0, incorrectTags = [];
+  const attendedQuestions = [];
 
   Question.find({})
     .then(questions => {
   
       questions.map(correctQuestion => {
         totalWeightage += correctQuestion.weightage
-
         userAnswers.find(userAnswer => {
-          if(userAnswer["answer"] == correctQuestion["answer"]) {
-            scoredWeightage += userAnswer.weightage;
-            return true;
-          } else {
-            incorrectTags.push(userAnswer.tags[0]);
-            return false;
+          if(userAnswer._id == correctQuestion._id) {
+            if(userAnswer["answer"] == correctQuestion["answer"]) {
+              scoredWeightage += userAnswer.weightage;
+              attendedQuestions.push(correctQuestion);
+              return true;
+            } else {
+              const incorrectTag = correctQuestion.tags[0];
+              incorrectTags.push(incorrectTag);
+              attendedQuestions.push({
+                ...correctQuestion._doc,
+                userPick: userAnswer.answer
+              })
+              return false;
+            }
           }
+          return false;
         });
       });
 
       res.status(200).json({
         totalWeightage: totalWeightage,
         scoredWeightage: scoredWeightage,
-        incorrectTags: incorrectTags
+        attendedQuestions: attendedQuestions,
+        incorrectTags: incorrectTags.filter((tag, i) => incorrectTags.indexOf(tag) == i)
       });
     })
 })
@@ -57,7 +65,8 @@ router.get("/addall", async (req, res) => {
       question: q.question,
       options: q.options,
       answer: q.answer,
-      weightage: q.weightage
+      weightage: q.weightage,
+      tags: q.tags
     })
       .save()
       .then(que => console.log(que));
