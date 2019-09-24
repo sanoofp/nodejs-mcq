@@ -1,7 +1,7 @@
 {
   "name": "educhamp-assessment-1",
   "version": "1.0.0",
-  "description": "EduChamp Assessment - Project 1",
+  "description": "node-mcq",
   "main": "app.js",
   "author": "Sanoofp",
   "license": "MIT",
