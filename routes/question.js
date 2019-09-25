@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const Question = require("../model/Question")
-const { ques } = require("../mcq_20")
 const { shuffle } = require("../helper/array")
 const { authorisation } = require("../helper/auth")
 
@@ -32,8 +31,11 @@ router.post("/evaluate", authorisation, (req, res) => {
 
   Question.find({})
     .then(questions => {
+      /* Iterates over the entire questions in database. */
       questions.map(correctQuestion => {
+        /* Calculate total weightage by summing up each weightage marks. */ 
         totalWeightage += correctQuestion.weightage
+        /* Iterates over the attended question by the user (data recevied from client) */
         userAnswers.find(userAnswer => {
           if(userAnswer._id == correctQuestion._id) {
             /*  
@@ -75,7 +77,7 @@ router.post("/evaluate", authorisation, (req, res) => {
  * @desc Add question to DB (from mcq_20.js)
  * For Development Purpose only - NEEDS TO BE DELETED IN PRODUCTION
 */
-router.get("/addall", async (req, res) => {
+/* router.get("/addall", async (req, res) => {
 
   await ques.map( async q => {
     await new Question({
@@ -89,6 +91,6 @@ router.get("/addall", async (req, res) => {
       .then(que => console.log(que));
   });
   res.status(200).json({ "OK": true })
-});
+}); */
 
 module.exports = router;
