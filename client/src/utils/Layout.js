@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Header from "../components/Header";
 import InfoNotify from "../components/Snackbar";
 import MuiDrawer from "../components/Drawer";
+import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import { loadUser } from "../actions/authAction";
 
@@ -17,6 +18,7 @@ function Layout(props) {
       <Loading />
       <MuiDrawer />
       <InfoNotify />
+      <Footer />
     </React.Fragment>
   )
 }

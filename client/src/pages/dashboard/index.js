@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import QuestionsContainer from "../../components/Questions";
 import Controls from "../../components/Questions/Controls";
-import SubmitDashboard from "../../components/Questions/Submit";
+import UserDetails from "../../components/Questions/UserDetails";
 
 const Dashoard = props => {
   const { questionReducer } = props;
@@ -19,7 +19,7 @@ const Dashoard = props => {
           </div>
           <div className="col-md-4">
             <Controls />
-            <SubmitDashboard />
+            <UserDetails />
           </div>
         </div>
       </div>

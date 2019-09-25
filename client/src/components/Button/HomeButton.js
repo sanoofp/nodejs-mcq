@@ -25,6 +25,7 @@ export default function HomeButton(props) {
     onClick={() => props.onClick()}
     fullWidth
     color={props.color}
+    {...props}
   >
     {props.text}
     {props.icon}

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-function SubmitDashboardInfo(props) {
+function UserDetails(props) {
   const { questionReducer, auth } = props;
   const { questions } = questionReducer
   let attendedCount = 0;
@@ -12,8 +12,8 @@ function SubmitDashboardInfo(props) {
     <div className="submit-dashboard card">
       <div className="container">
         <h3>User</h3>
-        <h4>
-          <img src={auth.user.imageUrl} alt="User-img" style={{width: "50px"}}/>
+        <h4 className="d-flex align-items-center justify-content-center">
+          <img src={auth.user.imageUrl} alt="User-img" />
           {auth.user.username}
         </h4>
         <div className="row d-flex align-items-center jutify-content-center flex-wrap">
@@ -36,4 +36,4 @@ const mapStateToProps = state => ({
   questionReducer: state.questionReducer
 })
 
-export default connect(mapStateToProps)(SubmitDashboardInfo);
+export default connect(mapStateToProps)(UserDetails);

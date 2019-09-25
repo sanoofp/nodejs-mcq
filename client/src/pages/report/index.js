@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import PercentageProgress from "../../components/Progress";
 import ReportTable from "../../components/Table";
+import UserDetails from "../../components/Questions/UserDetails";
 import AnalysisCard from "./AnalysisCard";
 
 const Report = props => {
@@ -29,6 +30,7 @@ const Report = props => {
         </div>
         <div className="col-md-4">
           <AnalysisCard incorrectTags={results.incorrectTags} />
+          <UserDetails />
         </div>
       </div>
     </div>

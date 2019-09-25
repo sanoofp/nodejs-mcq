@@ -24,7 +24,7 @@ header {
 .home {
   padding: 30px 18px;
   img {
-    width: 350px;
+    width: 360px;
   }
   h2 {
     text-align: center;
@@ -84,6 +84,11 @@ header {
 .submit-dashboard {
   margin: 20px 0 ;
   text-align: center;
+  img {
+    border-radius: 50%;
+    width: 50px;
+    margin: 0 6px;
+  }
 }
 
 .option {
@@ -149,4 +154,15 @@ header {
     }
   }
   
+}
+
+.footer {
+  margin: 50px 0 0 0;
+  padding: 1.3em 0.3em;
+  background-color: $primaryColor;
+  color: $white;
+  a {
+    color: $white;
+    text-decoration: none;
+  }
 }
