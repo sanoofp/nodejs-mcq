@@ -12,7 +12,7 @@ Webapp for online MCQ test practicing. Tech stack used in this project are:
 
   * [Node.js](https://nodejs.org/en/) - JavaScript runtime built on Chrome's V8 JavaScript engine.
   * [Express.js](http://expressjs.com/) - web framework for Node.js
-  * [Mongo DB](https://www.mongodb.com/) - NoQ Database
+  * [Mongo DB](https://www.mongodb.com/) - NoSQQ Database
   * [Passport.js](passportjs.org) - Authentication middleware for Node.js
 
 
@@ -32,10 +32,10 @@ Webapp for online MCQ test practicing. Tech stack used in this project are:
 
 > Features in the future updates :
 
-  * Implement Google Oauth using json web token
-  * Implement Timer for the Test
-  * User can download a PDF file of the attended question from the report dashboard ([using `@react-pdf/renderer` library](https://www.npmjs.com/package/@react-pdf/renderer#web-render-in-dom))
-  * A personilised Dashboard for the user with past test results
+  - ~~Implement Google Oauth using json web token~~
+  - Implement Timer for the Test
+  - User can download a PDF file of the attended question from the report dashboard ([using `@react-pdf/renderer` library](https://www.npmjs.com/package/@react-pdf/renderer#web-render-in-dom))
+  - A personilised Dashboard for the user with past test results
 
 ## How to contribute or run this project locally ?
 
