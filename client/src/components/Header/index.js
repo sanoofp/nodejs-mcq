@@ -36,7 +36,7 @@ function Header(props) {
             </div>
             <div className="hamburger">
               <IconButton aria-label="menu" onClick={() => handleDrawer(true)}>
-                <MenuRounded />
+                <MenuRounded style={{ color: "rgba(255, 255, 255, 0.9)" }} />
               </IconButton>
             </div>
           </div>
