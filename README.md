@@ -34,7 +34,7 @@ Webapp for online MCQ test practicing. Tech stack used in this project are:
 
   * Implement Google Oauth using json web token
   * Implement Timer for the Test
-  * User can download a PDF file of the attended question from the report dashboard ([using `react-to-pdf` library](https://www.npmjs.com/package/react-to-pdf))
+  * User can download a PDF file of the attended question from the report dashboard ([using `@react-pdf/renderer` library](https://www.npmjs.com/package/@react-pdf/renderer#web-render-in-dom))
   * A personilised Dashboard for the user with past test results
 
 ## How to contribute or run this project locally ?

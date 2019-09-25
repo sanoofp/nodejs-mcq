@@ -11,7 +11,11 @@ function SubmitDashboardInfo(props) {
   return (
     <div className="submit-dashboard card">
       <div className="container">
-        <h3>Statistics - {auth.user.username}</h3>
+        <h3>User</h3>
+        <h4>
+          <img src={auth.user.imageUrl} alt="User-img" style={{width: "50px"}}/>
+          {auth.user.username}
+        </h4>
         <div className="row d-flex align-items-center jutify-content-center flex-wrap">
           <div className="col-md-6">
             <p>

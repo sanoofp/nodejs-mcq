@@ -72,6 +72,7 @@ router.post("/signup", (req, res) => {
             token: token, 
             user: {
               email: user.email,
+              imageUrl: user.imageUrl,
               username: user.username
           }});
         })
@@ -85,16 +86,16 @@ router.post("/signup", (req, res) => {
   * @desc Authenticate a user with google account,
 */
 router.post("/google", (req, res) => {
-  console.log(req.body);
-  const { email, name, imageUrl } = req.body.profileObj;
+  const { email, name, imageUrl } = req.body.googleResponseObj.profileObj;
   User.findOne({ email: email })
     .then(user => {
       /* 
         If user exist, sign a new Token with jwt and return token along with required user details 
        */
       if(user) {
+        console.log("GOOGLE USER ALREADY EXIST");
         const token = jwt.sign({ id: user.id }, JWT_SECRET);
-        res.status(200).json({
+        return res.status(200).json({
           token: token, 
           user: {
             email: user.email,
@@ -106,6 +107,7 @@ router.post("/google", (req, res) => {
       /* 
         If user was not found on the DB, create a new user and respond with token and user details
       */
+     console.log("NEW GOOGLE USER");
       const newGoogleUser = new User({
         username: name,
         email: email,
@@ -114,7 +116,7 @@ router.post("/google", (req, res) => {
       newGoogleUser.save()
         .then(user => {
           const token = jwt.sign({ id: user.id }, JWT_SECRET);
-          res.status(200).json({
+          return res.status(200).json({
             token: token, 
             user: {
               email: user.email,
@@ -124,7 +126,6 @@ router.post("/google", (req, res) => {
           });
         })
     })
-  res.status(200).json({})
 });
 
 module.exports = router;

@@ -7,7 +7,9 @@ import {
   AUTH_FAIL,
   USER_LOADED,
   SIGNOUT_SUCCESS,
-  CLEAR_QUESTIONS
+  CLEAR_QUESTIONS,
+  GOOGLE_AUTH_FAIL,
+  GOOGLE_AUTH_SUCCESS
 } from "../store/types";
 import { handleLoading, handleDialog, handleSnackbar } from "./appStateAction";
 import { errorMsg } from "../helper/error";
@@ -71,9 +73,9 @@ export const signinWithEmail = data => dispatch => {
 
 /** 
   * @desc Create an account for the user using the email, username and pasword provided.
-  * If the response i OK, the loading, snackbar and dialog state are updated 
+  * If the response is OK, the loading, snackbar and dialog state are updated 
 */
-export const signupWithEmail = data => dispatch => {
+export const signupWithEmail = data => (dispatch, getState) => {
   dispatch(handleLoading(true));
   
   const body = {
@@ -81,42 +83,34 @@ export const signupWithEmail = data => dispatch => {
     email: data.email,
     password: data.password
   };
-  axios({
-    method: "post",
-    url: "/api/auth/signup",
-    data: body
-  })
-    .then(function(res) {
-      dispatch(handleLoading(false));
-      dispatch(handleDialog("signupDialogOpen", false));
-      dispatch(handleSnackbar(true, "success", "Successfully created your accound"));
+  axios.post("/api/auth/signup", body)
+    .then(res => {
       dispatch({
         type: SIGNUP_SUCCESS,
         payload: {
           user: res.data.user,
-          token: res.date.token
+          token: res.data.token
         }
       });
-
+      dispatch(handleLoading(false));
+      dispatch(handleDialog("signupDialogOpen", false));
+      dispatch(handleSnackbar(true, "success", "Successfully created your account"));
     })
-    .catch(function(err) {
+    .catch(err => {
+      dispatch(handleLoading(false));
       if(err.response && err.response.data) {
         dispatch(handleSnackbar(true, "error", errorMsg(err.response)));
+        dispatch({ type: SIGNUP_FAIL })
       }
-      dispatch({ type: SIGNUP_FAIL })
-      dispatch(handleLoading(false));
     });
 }
 
 /** 
   * @desc Signin or signup user with the google account.
 */
-export const googleAuth = responseObj => (dispatch, getState) => {
+export const googleAuth = googleResponseObj => (dispatch, getState) => {
   dispatch(handleLoading(true));
-  console.log(responseObj);
-  const body = {
-    responseObj
-  }
+  const body = { googleResponseObj }
 
   axios({
     method: "post",
@@ -129,7 +123,7 @@ export const googleAuth = responseObj => (dispatch, getState) => {
       dispatch(handleDialog("signupDialogOpen", false));
       dispatch(handleSnackbar(true, "success", "Successfully logged in with Google"));
       dispatch({
-        type: SIGNIN_SUCCESS,
+        type: GOOGLE_AUTH_SUCCESS,
         payload: {
           user: res.data.user,
           token: res.data.token
@@ -137,6 +131,7 @@ export const googleAuth = responseObj => (dispatch, getState) => {
       })
     })
     .catch(function(err) {
+      dispatch({ type: GOOGLE_AUTH_FAIL })      
       dispatch(handleLoading(false));
     });
 }

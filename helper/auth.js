@@ -28,6 +28,6 @@ module.exports = {
       .createHash("md5")
       .update(email)
       .digest("hex");
-    return `https://www.gravatar.com/avatar/${md5}?s=100&d=identicon`
+    return `https://www.gravatar.com/avatar/${md5Hash}?s=100&d=identicon`
   }
 }

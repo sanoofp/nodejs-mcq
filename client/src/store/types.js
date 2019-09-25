@@ -8,6 +8,8 @@ export const SIGNIN_FAIL = "SIGNIN_FAIL";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAIL = "SIGNUP_FAIL";
 export const SIGNOUT_SUCCESS = "SIGNOUT_SUCCESS";
+export const GOOGLE_AUTH_SUCCESS = "GOOGLE_AUTH_SUCCESS";
+export const GOOGLE_AUTH_FAIL = "GOOGLE_AUTH_FAIL";
 export const AUTH_FAIL = "AUTH_FAIL";
 export const USER_LOADED = "USER_LOADED";
 
