@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import DashboardRounded from "@material-ui/icons/DashboardRounded";
 import HomeButton from "../../components/Button/HomeButton";
-import LinkTo from "../../components/Button/LinkTo";
 import GoogleButton from "../../components/Button/Google";
 import home_art from "../../assets/images/home.svg";
 import SigninDialog from "../../components/Dialog/Signin";

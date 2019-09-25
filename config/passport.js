@@ -1,5 +1,4 @@
 const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require("bcryptjs");
 const User = require("../model/User");
@@ -14,7 +13,8 @@ passport.use(new LocalStrategy({
   User.findOne({ email: email })
     .then(user => {
       if (!user) return done(null, false, {message: `No user found with email ${email}`});
-      
+      if (!user.password) return done(null, false, {message: `User is not signed up with password for ${email}. Please try Google sign in.`});
+
       bcrypt.compare(password, user.password, (err, isMatch) => {
         if (err) throw err;
         
@@ -29,29 +29,3 @@ passport.use(new LocalStrategy({
     .catch(err => done(err))
   }
 ));
-
-/* 
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/auth/google/callback",
-  proxy: true
-}, function (accessToken, refreshToken, profile, done) {
-  const googleUser = {
-    email: profile.emails[0].value,
-    username: profile.displayName,
-    photo: profile.photos[0].value
-  }
-  User
-    .findOne({email: googleUser.email})
-    .then(user => {
-      if (user) 
-        return done(null, user);
-      
-      // Create new User
-      new User(googleUser)
-        .save()
-        .then(user => done(null, user));
-    })
-  return done(null, profile)
-})) */
