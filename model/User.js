@@ -14,7 +14,7 @@ const userSchema = new Schema({
   password: {
     type: String
   },
-  photo: {
+  imageUrl: {
     type: String,
   },
   registered_date: {

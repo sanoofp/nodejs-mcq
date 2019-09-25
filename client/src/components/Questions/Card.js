@@ -17,12 +17,12 @@ function QuestionCard(props) {
           currentQuestion.options.map((option, key) => 
             <div key={key} className="option">
               <Radio
-                onChange={handleChange}
+                onChange={e => handleChange(e.target.value)}
                 color={`${currentQuestion["answer"] && currentQuestion["answer"] === option ? "default" : "primary"}`}
                 checked={choice === option || currentQuestion["answer"] === option}
                 value={option}
                 label={option}
-              /> <h5>{option}</h5>
+              /> <h5 onClick={() => handleChange(option)}>{option}</h5>
             </div>
           )
         }

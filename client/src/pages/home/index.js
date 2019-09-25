@@ -10,6 +10,7 @@ import { handleDialog } from "../../actions/appStateAction";
 
 function Home(props) {
   const { auth, handleDialog } = props;
+
   return (
     <div className="home">
       <div className="container">

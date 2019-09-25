@@ -108,6 +108,38 @@ export const signupWithEmail = data => dispatch => {
     });
 }
 
+/** 
+  * @desc Signin or signup user with the google account.
+*/
+export const googleAuth = responseObj => (dispatch, getState) => {
+  dispatch(handleLoading(true));
+  console.log(responseObj);
+  const body = {
+    responseObj
+  }
+
+  axios({
+    method: "post",
+    url: "/api/auth/google",
+    data: body,
+  })
+    .then(function(res) {
+      dispatch(handleLoading(false));
+      dispatch(handleDialog("signinDialogOpen", false));
+      dispatch(handleDialog("signupDialogOpen", false));
+      dispatch(handleSnackbar(true, "success", "Successfully logged in with Google"));
+      dispatch({
+        type: SIGNIN_SUCCESS,
+        payload: {
+          user: res.data.user,
+          token: res.data.token
+        }
+      })
+    })
+    .catch(function(err) {
+      dispatch(handleLoading(false));
+    });
+}
 
 /** 
   * @desc Sign out the user.
@@ -119,5 +151,6 @@ export const signOut = () => dispatch => {
   dispatch(handleLoading(true));
   dispatch({ type: CLEAR_QUESTIONS })
   dispatch({ type: SIGNOUT_SUCCESS })
+  dispatch(handleSnackbar(true, "success", "Signed out of your account"));
   dispatch(handleLoading(false));
 }

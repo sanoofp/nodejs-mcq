@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const jwt = require("jsonwebtoken")
 const { JWT_SECRET } = require("../config/keys")
 
@@ -17,5 +18,16 @@ module.exports = {
     } catch (e) {
       res.status(400).json({ msg: "Invalid Token" });
     }
+  },
+  /** 
+    * @desc Generate Avatar images from email hash.
+    * @param {string} email - Email of the user. (Hash generated from email is used to generate Avatar images).
+  */
+  generateImageUrl: function(email) {
+    const md5Hash = crypto
+      .createHash("md5")
+      .update(email)
+      .digest("hex");
+    return `https://www.gravatar.com/avatar/${md5}?s=100&d=identicon`
   }
 }

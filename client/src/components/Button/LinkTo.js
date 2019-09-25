@@ -8,7 +8,7 @@ export default function LinkTo(props) {
       {...props}
       component={Link}
       to={props.to}
-      color="secondary"
+      color={`${props.color ? props.color : "secondary"}`}
     >
       {props.text}
     </Button>

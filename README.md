@@ -16,6 +16,27 @@ Webapp for online MCQ test practicing. Tech stack used in this project are:
   * [Passport.js](passportjs.org) - Authentication middleware for Node.js
 
 
+## Features
+
+* User can sign in or sign up with email and password or with Google account.
+
+* From the dashboard, user can attend question, personilsed according to the CAT (Computerised Adaptive Test).
+
+* On the completion of the test, user can preview their report
+
+  * Percentage of the test
+  * Attended Questoin with correct and incorrect answers filtered.
+  * On the basis of the test, suggestion for improvments are generated.
+
+#### TODO's
+
+> Features in the future updates :
+
+  * Implement Google Oauth using json web token
+  * Implement Timer for the Test
+  * User can download a PDF file of the attended question from the report dashboard ([using `react-to-pdf` library](https://www.npmjs.com/package/react-to-pdf))
+  * A personilised Dashboard for the user with past test results
+
 ## How to contribute or run this project locally ?
 
 ### Setup this repo

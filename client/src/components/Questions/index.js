@@ -33,7 +33,7 @@ function QuestionsContainer(props) {
   return currentQuestion ? 
     <React.Fragment>
       <QuestionsCard
-        handleChange={e => handleChange(e.target.value)}
+        handleChange={option => handleChange(option)}
         choice={currentChoice}
         index={currentIndex}
         currentQuestion={currentQuestion}

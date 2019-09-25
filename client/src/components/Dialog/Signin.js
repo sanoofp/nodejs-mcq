@@ -64,7 +64,7 @@ function SigninDialog(props) {
           </Button>
         </div>
         <div className="divider"></div>
-        <GoogleButton text="Sign in with google" response={res => signinWithEmail(res)} />
+        <GoogleButton text="Sign in with google" />
       </DialogContent>
     </Dialog>
   )

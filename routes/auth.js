@@ -4,7 +4,7 @@ const passport = require("passport");
 const { localStrategySchema } = require("../helper/validation")
 const User = require("../model/User");
 const { JWT_SECRET } = require("../config/keys")
-const { authorisation } = require("../helper/auth")
+const { authorisation, generateImageUrl } = require("../helper/auth")
 
 /**
   * @route GET /api/auth  
@@ -34,7 +34,8 @@ router.post("/signin", (req, res, next) => {
       token: token, 
       user: {
         email: user.email,
-        username: user.username
+        username: user.username,
+        imageUrl: user.imageUrl
       }
     });
   
@@ -59,6 +60,7 @@ router.post("/signup", (req, res) => {
       const newUser = new User({
         username: value.username, 
         email: value.email, 
+        imageUrl: generateImageUrl(value.email),
         password: value.password
       });
 
@@ -78,5 +80,51 @@ router.post("/signup", (req, res) => {
     .catch(err => console.log(err))
 });
 
+/**
+  * @route POST /api/auth/google 
+  * @desc Authenticate a user with google account,
+*/
+router.post("/google", (req, res) => {
+  console.log(req.body);
+  const { email, name, imageUrl } = req.body.profileObj;
+  User.findOne({ email: email })
+    .then(user => {
+      /* 
+        If user exist, sign a new Token with jwt and return token along with required user details 
+       */
+      if(user) {
+        const token = jwt.sign({ id: user.id }, JWT_SECRET);
+        res.status(200).json({
+          token: token, 
+          user: {
+            email: user.email,
+            username: user.username,
+            imageUrl: user.imageUrl
+          }
+        });
+      }
+      /* 
+        If user was not found on the DB, create a new user and respond with token and user details
+      */
+      const newGoogleUser = new User({
+        username: name,
+        email: email,
+        imageUrl: imageUrl
+      })
+      newGoogleUser.save()
+        .then(user => {
+          const token = jwt.sign({ id: user.id }, JWT_SECRET);
+          res.status(200).json({
+            token: token, 
+            user: {
+              email: user.email,
+              username: user.username,
+              imageUrl: user.imageUrl
+            }
+          });
+        })
+    })
+  res.status(200).json({})
+});
 
 module.exports = router;
