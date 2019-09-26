@@ -20,7 +20,10 @@ function SigninDialog(props) {
     setInputs({ ...inputs, [name]: e.target.value });
   }
 
-  const handleSubmit = () => signinWithEmail(inputs);
+  const handleSubmit = e => {
+    e.preventDefault();
+    signinWithEmail(inputs)
+  }
 
   return (
     <Dialog
@@ -30,7 +33,7 @@ function SigninDialog(props) {
       >
       <DialogContent className="dialog">
         <h1>Signin</h1>
-        <div>
+        <form onSubmit={handleSubmit}>
           <TextField
             name="email"
             label="Email"
@@ -57,11 +60,10 @@ function SigninDialog(props) {
             className="btn" 
             type="submit"
             fullWidth
-            onClick={handleSubmit}
           >
             Signin
           </Button>
-        </div>
+        </form>
         <div className="divider"></div>
         <GoogleButton text="Sign in with google" />
       </DialogContent>

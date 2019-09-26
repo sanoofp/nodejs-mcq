@@ -21,7 +21,10 @@ function SignupDialog(props) {
     setInputs({ ...inputs, [name]: e.target.value });
   }
 
-  const handleSubmit = () => signupWithEmail(inputs);
+  const handleSubmit = e => {
+    e.preventDefault();
+    signupWithEmail(inputs)
+  }
 
   return (
     <Dialog
@@ -31,7 +34,7 @@ function SignupDialog(props) {
     >
       <DialogContent className="dialog">
         <h1>Signup</h1>
-        <div>
+        <form onSubmit={handleSubmit}>
           <TextField
             name="username"
             label="Username"
@@ -68,11 +71,10 @@ function SignupDialog(props) {
             className="btn" 
             type="submit"
             fullWidth
-            onClick={handleSubmit}
           >
             Create account
           </Button>
-        </div>
+        </form>
         <div className="divider"></div>
         <GoogleButton text="Sign up with google" />
       </DialogContent>
