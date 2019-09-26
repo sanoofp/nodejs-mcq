@@ -9,13 +9,17 @@ function Timer(props) {
     stopTimer();
   }
 
+  const padZero = number => {
+    return number < 10 ? `0${number}` : number
+  }
+
   const toMinutes = seconds => {
-    return `${Math.floor(seconds / 60)}:${Math.floor(seconds % 60)}`;
+    return `${Math.floor(seconds / 60)}:${padZero(Math.floor(seconds % 60))}`;
   }
 
   return isRunning &&
     <div className="timer-container">
-      <p>{toMinutes(timeLeft)}</p>
+      <p>Time left {toMinutes(timeLeft)}</p>
     </div>
 }
 

@@ -4,10 +4,11 @@ import {
   SET_CURRENT_INDEX,
   CLEAR_QUESTIONS,
   SET_RESULTS,
-  SET_CURRENT_CHOICE
+  SET_CURRENT_CHOICE,
 } from "../store/types";
 import axios from "axios";
 import { handleLoading } from "./appStateAction";
+import { stopTimer } from "./timerAction";
 import { axiosHeader } from "../helper/auth";
 
 
@@ -73,6 +74,7 @@ export const submitAnswers = () => (dispatch, getState) => {
   const body = JSON.stringify({ questions })
 
   dispatch(handleLoading(true))
+  dispatch(stopTimer());
   axios.post("/api/question/evaluate", body, axiosHeader(getState))
   .then((res) => {
     dispatch(handleLoading(false))
@@ -85,4 +87,12 @@ export const submitAnswers = () => (dispatch, getState) => {
     dispatch(handleLoading(false))
     console.log(err);
   });
+}
+
+
+/** 
+  * @desc Clear current questions for next round of test.
+*/
+export const rerunTest = () => dispatch => {
+  dispatch({ type: CLEAR_QUESTIONS })  
 }

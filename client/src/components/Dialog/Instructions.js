@@ -12,12 +12,24 @@ function Instructions(props) {
     <Dialog
       open={instructionsDialogOpen}
       onClose={() => handleDialog("instructionsDialogOpen", false)}
-      aria-labelledby="instruction"
-      aria-describedby="Instruction"
+      maxWidth="md"
+      fullWidth={true}
+      className="dialog"
     >
     <DialogContent className="dialog">
       <h1>Instructions</h1>
-      
+    
+      <ul>
+        <li>Current active question can be shown on the left side of the dashboard.</li>
+        <li>After selecting your option, you need to click on <b>Save</b>, else the question will not be considred for submission</li>
+        <li>You can select questions from the <b>Questions</b> tab at the right side of the dashboard.</li>
+        <li>Question attended will be shown in green colour</li>
+        <li>You can revire each submitted questions by clicking on the question number.</li>
+
+        <li><b>Test will ends in 15 mins, you need to submit on or before this time</b></li>
+      </ul>
+      <h4>Click on the below button to Start the Test</h4>
+
       <Button 
         fullWidth 
         color="primary" 

@@ -1,13 +1,18 @@
 import React from "react";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import PercentageProgress from "../../components/Progress";
 import ReportTable from "../../components/Table";
 import UserDetails from "../../components/Questions/UserDetails";
 import AnalysisCard from "./AnalysisCard";
+import ReportActions from "./ReportActions";
+import { rerunTest } from "../../actions/questionAction";
 
 const Report = props => {
-  const {questionReducer} = props;
-  const {results} = questionReducer
+  const { questionReducer, rerunTest } = props;
+  const { results } = questionReducer;
+
+  if(!results) return <Redirect to="/dashboard" />
 
   const percentage = (results.scoredWeightage * 100) / results.totalWeightage;
 
@@ -26,6 +31,9 @@ const Report = props => {
               <h3>Attended Questions</h3>
               <ReportTable questionsArr={results.attendedQuestions} />
             </div>
+
+            <ReportActions rerun={() => rerunTest()} />
+
           </div>
         </div>
         <div className="col-md-4">
@@ -37,6 +45,6 @@ const Report = props => {
   );
 }
 
-const mapStateToProps = state => ({questionReducer: state.questionReducer})
+const mapStateToProps = state => ({ questionReducer: state.questionReducer })
 
-export default connect(mapStateToProps)(Report);
+export default connect(mapStateToProps, { rerunTest })(Report);

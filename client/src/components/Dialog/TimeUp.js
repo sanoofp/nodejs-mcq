@@ -12,8 +12,7 @@ function TimeUp(props) {
     <Dialog
       open={timeupDialogOpen}
       onClose={() => handleDialog("timeupDialogOpen", true)}
-      aria-labelledby="timeUp"
-      aria-describedby="Time up"
+      className="dialog"
     >
     <DialogContent className="dialog">
       <h1>Timeup</h1>

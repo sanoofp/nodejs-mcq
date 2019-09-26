@@ -27,8 +27,6 @@ function SignupDialog(props) {
     <Dialog
       open={signupDialogOpen}
       onClose={() => handleDialog("signupDialogOpen", false)}
-      maxWidth="md"
-      fullWidth={true}
       className="dialog"
     >
       <DialogContent className="dialog">

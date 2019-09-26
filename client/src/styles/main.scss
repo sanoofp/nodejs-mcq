@@ -24,7 +24,7 @@ header {
 .home {
   padding: 30px 18px;
   img {
-    width: 360px;
+    width: 340px;
   }
   h2 {
     text-align: center;
@@ -39,6 +39,14 @@ header {
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.6);
+}
+
+.dialog {
+  ul {
+    font-size: 1.1em;
+    line-height: 1.4;
+    color: rgba(10,10,10,0.9);
+  }
 }
 
 .card {
@@ -172,7 +180,7 @@ header {
 
 .timer-container {
   position: fixed;
-  width: 100px;
+  width: 200px;
   padding: 1.2em 1.5em;
   top: 20px;
   left: 50%;
