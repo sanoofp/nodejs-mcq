@@ -43,8 +43,11 @@ header {
 
 .dialog {
   ul {
+    li {
+      margin: 3px 0;
+    }
     font-size: 1.1em;
-    line-height: 1.4;
+    line-height: 1.5;
     color: rgba(10,10,10,0.9);
   }
 }

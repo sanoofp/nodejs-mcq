@@ -18,7 +18,6 @@ export const startTimer = () => dispatch => {
 
 export const stopTimer = () => dispatch => {
   clearInterval(timer);
-  dispatch(handleDialog("timeupDialogOpen", true));
   dispatch({
     type: STOP_TIMER
   });

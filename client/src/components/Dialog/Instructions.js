@@ -11,7 +11,10 @@ function Instructions(props) {
   return (
     <Dialog
       open={instructionsDialogOpen}
-      onClose={() => handleDialog("instructionsDialogOpen", false)}
+      onClose={() => {
+        startTimer()
+        handleDialog("instructionsDialogOpen", false)
+      }}
       maxWidth="md"
       fullWidth={true}
       className="dialog"
@@ -25,6 +28,7 @@ function Instructions(props) {
         <li>You can select questions from the <b>Questions</b> tab at the right side of the dashboard.</li>
         <li>Question attended will be shown in green colour</li>
         <li>You can revire each submitted questions by clicking on the question number.</li>
+        <li>If you completed the exam click on the <b>Submit Button</b> on the <i>Question Dahboard</i> on the right side of the Dashboard.</li>
 
         <li><b>Test will ends in 15 mins, you need to submit on or before this time</b></li>
       </ul>
@@ -39,7 +43,7 @@ function Instructions(props) {
         }} 
         variant="outlined"
       >
-        I understand, Start the test
+        I understood, Start the test
       </Button>
     </DialogContent>
   </Dialog>

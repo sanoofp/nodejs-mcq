@@ -1,12 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { stopTimer } from "../../actions/timerAction";
+import { handleDialog } from "../../actions/appStateAction";
 
 function Timer(props) {
-  const { timer: { timeLeft, isRunning }, stopTimer } = props;
+  const { timer: { timeLeft, isRunning }, stopTimer, handleDialog } = props;
   
   if(timeLeft <= 0) {
     stopTimer();
+    handleDialog("timeupDialogOpen", true)
   }
 
   const padZero = number => {
@@ -27,4 +29,4 @@ const mapStateToProps = state => ({
   timer: state.timerReducer
 });
 
-export default connect(mapStateToProps, { stopTimer })(Timer);
+export default connect(mapStateToProps, { stopTimer, handleDialog })(Timer);

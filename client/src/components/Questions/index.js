@@ -55,7 +55,7 @@ function QuestionsContainer(props) {
         onClick={() => handleNext(currentIndex)}
         disabled={currentChoice.length === 0}
       >
-        Next
+        Save
       </Button>
     </React.Fragment>
     : 

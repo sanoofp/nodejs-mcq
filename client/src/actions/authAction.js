@@ -11,6 +11,7 @@ import {
   GOOGLE_AUTH_FAIL,
   GOOGLE_AUTH_SUCCESS
 } from "../store/types";
+import { stopTimer } from "./timerAction";
 import { handleLoading, handleDialog, handleSnackbar } from "./appStateAction";
 import { errorMsg } from "../helper/error";
 import { axiosHeader } from "../helper/auth";
@@ -148,6 +149,7 @@ export const googleAuth = googleResponseObj => (dispatch, getState) => {
 */
 export const signOut = () => dispatch => {
   dispatch(handleLoading(true));
+  dispatch(stopTimer());
   dispatch({ type: CLEAR_QUESTIONS })
   dispatch({ type: SIGNOUT_SUCCESS })
   dispatch(handleSnackbar(true, "success", "Signed out of your account"));

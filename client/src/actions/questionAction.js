@@ -7,10 +7,9 @@ import {
   SET_CURRENT_CHOICE,
 } from "../store/types";
 import axios from "axios";
-import { handleLoading } from "./appStateAction";
+import { handleLoading, handleDialog } from "./appStateAction";
 import { stopTimer } from "./timerAction";
 import { axiosHeader } from "../helper/auth";
-
 
 /** 
   * @desc Get all questions from database.
@@ -74,10 +73,10 @@ export const submitAnswers = () => (dispatch, getState) => {
   const body = JSON.stringify({ questions })
 
   dispatch(handleLoading(true))
-  dispatch(stopTimer());
   axios.post("/api/question/evaluate", body, axiosHeader(getState))
   .then((res) => {
     dispatch(handleLoading(false))
+    dispatch(stopTimer());
     dispatch({
       type: SET_RESULTS,
       payload: res.data
@@ -94,5 +93,6 @@ export const submitAnswers = () => (dispatch, getState) => {
   * @desc Clear current questions for next round of test.
 */
 export const rerunTest = () => dispatch => {
-  dispatch({ type: CLEAR_QUESTIONS })  
+  dispatch({ type: CLEAR_QUESTIONS });
+  dispatch(handleDialog("instructionsDialogOpen", true))
 }

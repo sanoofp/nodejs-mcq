@@ -12,7 +12,7 @@ const Report = props => {
   const { questionReducer, rerunTest } = props;
   const { results } = questionReducer;
 
-  if(!results) return <Redirect to="/dashboard" />
+  if(Object.keys(results).length === 0) return <Redirect to="/dashboard" />
 
   const percentage = (results.scoredWeightage * 100) / results.totalWeightage;
 

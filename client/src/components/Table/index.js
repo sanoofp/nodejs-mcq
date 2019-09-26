@@ -50,8 +50,8 @@ function ReportTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.answer} style={{
+            {rows.map((row, index) => (
+              <TableRow key={index} style={{
                 backgroundColor: row.answer === row.userPick ? green["50"] : red["50"]
               }}>
                 <TableCell component="th" scope="row">
