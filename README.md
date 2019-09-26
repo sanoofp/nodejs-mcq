@@ -55,8 +55,6 @@ Webapp for online MCQ test practicing. Tech stack used in this project are:
   {
     "JWT_SECRET": "json_web_token_secret",
     "MONGO_URI": "mongo_uri",
-    "GOOGLE_CLIENT_ID": "google_client_id",
-    "GOOGLE_CLIENT_SECRET": "google_client_secret"
   }
   ```
 
