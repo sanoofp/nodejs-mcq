@@ -1,11 +1,20 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
-import { loadQuestions, setCurrentQuestion, setCurrentChoice } from "../../actions/questionAction";
 import QuestionsCard from "../../components/Questions/Card";
+import { 
+  loadQuestions, 
+  setCurrentQuestion, 
+  setCurrentChoice 
+} from "../../actions/questionAction";
 
 function QuestionsContainer(props) {
-  const { questionsReducer, loadQuestions, setCurrentQuestion, setCurrentChoice } = props
+  const { 
+    questionsReducer, 
+    loadQuestions, 
+    setCurrentQuestion, 
+    setCurrentChoice 
+  } = props
   const { currentIndex, questions, currentChoice } = questionsReducer;
   
   const currentQuestion = questions[currentIndex];
@@ -59,4 +68,8 @@ const mapStateToProps = state => ({
   questionsReducer: state.questionReducer
 })
 
-export default connect(mapStateToProps, { loadQuestions, setCurrentQuestion, setCurrentChoice })(QuestionsContainer);
+export default connect(mapStateToProps, { 
+  loadQuestions, 
+  setCurrentQuestion, 
+  setCurrentChoice 
+})(QuestionsContainer);

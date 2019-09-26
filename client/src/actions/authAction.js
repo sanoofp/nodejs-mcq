@@ -55,6 +55,7 @@ export const signinWithEmail = data => dispatch => {
   .then(function(res) {
     dispatch(handleLoading(false));
     dispatch(handleDialog("signinDialogOpen", false));
+    dispatch(handleDialog("instructionsDialogOpen", true));
     dispatch(handleSnackbar(true, "success", "Signed in to your account"));    
     dispatch({
       type: SIGNIN_SUCCESS,
@@ -94,6 +95,7 @@ export const signupWithEmail = data => (dispatch, getState) => {
       });
       dispatch(handleLoading(false));
       dispatch(handleDialog("signupDialogOpen", false));
+      dispatch(handleDialog("instructionsDialogOpen", true));      
       dispatch(handleSnackbar(true, "success", "Successfully created your account"));
     })
     .catch(err => {
@@ -121,6 +123,8 @@ export const googleAuth = googleResponseObj => (dispatch, getState) => {
       dispatch(handleLoading(false));
       dispatch(handleDialog("signinDialogOpen", false));
       dispatch(handleDialog("signupDialogOpen", false));
+      dispatch(handleDialog("instructionsDialogOpen", true));
+      
       dispatch(handleSnackbar(true, "success", "Successfully logged in with Google"));
       dispatch({
         type: GOOGLE_AUTH_SUCCESS,

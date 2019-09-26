@@ -2,12 +2,14 @@ import {
   HANDLE_DIALOG_STATE,
   LOADING,
   SNACKBAR_STATE,
-  DRAWER_STATE
+  DRAWER_STATE,
  } from "../store/types";
 
 const initialState = {
   signinDialogOpen: false,
   signupDialogOpen: false,
+  instructionsDialogOpen: false,
+  timeupDialogOpen: false,
   drawerOpen: false,
   loading: false,
   snackbar: {

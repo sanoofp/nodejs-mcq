@@ -3,6 +3,11 @@ export const HANDLE_DIALOG_STATE = "HANDLE_DIALOG_STATE";
 export const DRAWER_STATE = "DRAWER_STATE";
 export const SNACKBAR_STATE = "SNACKBAR_STATE";
 
+export const HANDLE_TIMER = "HANDLE_TIMER";
+export const TIMER_TICK = "TIMER_TICK";
+export const START_TIMER = "START_TIMER";
+export const STOP_TIMER = "STOP_TIMER";
+
 export const SIGNIN_SUCCESS = "SIGNIN_SUCCESS";
 export const SIGNIN_FAIL = "SIGNIN_FAIL";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";

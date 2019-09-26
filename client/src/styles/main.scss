@@ -169,3 +169,23 @@ header {
     text-decoration: none;
   }
 }
+
+.timer-container {
+  position: fixed;
+  width: 100px;
+  padding: 1.2em 1.5em;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 12px;
+  background-color: $primaryColor;
+  color: $white;
+  z-index: 999;
+  box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.2);
+  text-align: center;
+  p {
+    margin: 0;
+    font-family: $secondaryFont;
+    font-weight: 700; 
+  }
+}

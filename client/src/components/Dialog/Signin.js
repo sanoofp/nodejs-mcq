@@ -26,8 +26,9 @@ function SigninDialog(props) {
     <Dialog
       open={signinDialogOpen}
       onClose={() => handleDialog("signinDialogOpen", false)}
-      aria-labelledby="signin"
-      aria-describedby="Signin"
+      maxWidth="md"
+      fullWidth={true}
+      className="dialog"
       >
       <DialogContent className="dialog">
         <h1>Signin</h1>
