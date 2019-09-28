@@ -20,7 +20,7 @@ function Home(props) {
             <h2>Online MCQ question assessment</h2>
           </div>
           <div className="col-md-4 d-flex align-items-center justify-content-center flex-column">
-           <p className="text-center">A Platform to practice for MCQ Exams, personalised according to Computer Adaptive Test. Generates report and provides you with suggesions for future imrovments</p>
+           <p>A Platform to practice for MCQ Exams, personalised according to Computer Adaptive Test. Generates report and provides you with suggesions for future imrovments</p>
             { 
               auth.isAuthenticated ? 
                 <HomeButton 

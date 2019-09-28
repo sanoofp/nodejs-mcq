@@ -93,7 +93,6 @@ router.post("/google", (req, res) => {
         If user exist, sign a new Token with jwt and return token along with required user details 
        */
       if(user) {
-        console.log("GOOGLE USER ALREADY EXIST");
         const token = jwt.sign({ id: user.id }, JWT_SECRET);
         return res.status(200).json({
           token: token, 
@@ -107,7 +106,6 @@ router.post("/google", (req, res) => {
       /* 
         If user was not found on the DB, create a new user and respond with token and user details
       */
-     console.log("NEW GOOGLE USER");
       const newGoogleUser = new User({
         username: name,
         email: email,

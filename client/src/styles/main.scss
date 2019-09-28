@@ -29,6 +29,11 @@ header {
   h2 {
     text-align: center;
   }
+  p {
+    font-family: $secondaryFont;
+    font-size: 1.1em;
+    line-height: 1.2;
+  }
 }
 
 .loading {
